@@ -1,11 +1,24 @@
 <div class="app__content" role="main">
   <h1 class="app__title">Take Home Problem</h1>
   <h2 class="app__description">Review .ts file to view instructions</h2>
-
-  <div *ngIf="device$ | async as devices; else devices">
-    <div *ngFor="let device of devices">
-      <!-- work goes here -->
+  <div class="device-grid">
+    <div *ngIf="loading" class="loader">
     </div>
+    <ng-container *ngIf="!loading"> 
+    <div  class="device-card" *ngFor="let device of devices">
+      <div class="device-card-header">
+        <h3>{{ device.name }}</h3>
+        <p>{{ device.type }}</p>
+        <p>{{ device.state }}</p>
+      </div>
+      <div class="device-card-body">
+        <img *ngIf="device.type == 'door' || device.type == 'light'; else noImg" [src]="loadDeviceTypeImg(device.state,device.type)" alt="{{ device.type }} state">
+        <ng-template #noImg>Image N/A</ng-template>
+        
+      </div>
+    </div>
+   </ng-container> 
   </div>
-  <ng-template #devices>...</ng-template>
+  
+
 </div>
