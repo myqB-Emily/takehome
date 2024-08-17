@@ -16,6 +16,8 @@ export class DeviceService {
     return of(deviceData as IDevice[]).pipe(delay(3000));
   }
 
+
+  
   public getDeviceStateDataStream(
     device: IDevice
   ): Observable<LightState | DoorState> {
